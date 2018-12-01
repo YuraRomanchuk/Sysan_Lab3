@@ -279,7 +279,7 @@ namespace SA_lab_2
         }
         private void outfilebutton_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "Текстові файли (*.txt)|*.txt";
+            saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if ((OStream = saveFileDialog1.OpenFile()) != null)
@@ -316,7 +316,7 @@ namespace SA_lab_2
             // Error Checking
             if (Xinput.Text == null || outfile.Text == null || Yinput.Text == null)
             {
-                MessageBox.Show("Введіть вхідні файли");
+                MessageBox.Show("Enter input files");
                 return;
             }
             OStream = saveFileDialog1.OpenFile();
@@ -340,8 +340,6 @@ namespace SA_lab_2
             Y = new double[dy][];
             for (int i = 0; i < dy; i++)
                 Y[i] = new double[n];
-            progressBar1.Value = 5;
-            progressBar1.Refresh();
             PolyCoef = new double[dy][][][];
             for (int m = 0; m < dy; m++)
                 PolyCoef[m] = new double[N][][];
@@ -358,7 +356,7 @@ namespace SA_lab_2
             }
             catch
             {
-                MessageBox.Show("Невірний формат файлу вхідних даних.");
+                MessageBox.Show("Incorrect format of input files");
                 return;
             }
             for (int i = 0, k = 0; i < n; i++)
@@ -375,7 +373,7 @@ namespace SA_lab_2
             }
             catch
             {
-                MessageBox.Show("Невірний формат файлу Y ");
+                MessageBox.Show("Incorrect format of files Y ");
                 return;
             }
             int p = 0;
@@ -389,7 +387,7 @@ namespace SA_lab_2
         }
         private void MinMaxFound()
         {
-            Result.Text += "Мінімальні та максимальні значення векторів:\r\n";
+            Result.Text += "Max and min values of vectors:\r\n";
             Result.Refresh();
             MinX = new double[N][];
             for (int i = 0; i < N; i++)
@@ -423,7 +421,7 @@ namespace SA_lab_2
                 foreach (double x in Y[i]) if (MaxY[i] < x) MaxY[i] = x;
             }
             for (int i = 0; i < dy; i++)
-                Result.Text += "мінімум Y" + (i + 1) + " = " + MinY[i] + "\tмаксимум Y" + (i + 1) + " = " + MaxY[i] + "\r\n";
+                Result.Text += "min Y" + (i + 1) + " = " + MinY[i] + "\tmax Y" + (i + 1) + " = " + MaxY[i] + "\r\n";
         }
         private void Normalizing()
         {
@@ -755,7 +753,7 @@ namespace SA_lab_2
             }
             if (Flag)
             {
-                Result.Text += "\r\n Матриця λ:\r\n";
+                Result.Text += "\r\n Matrix λ:\r\n";
                 for (int i = 0; i < N; i++)
                 {
                     Result.Text += "\t ||λ" + (i + 1) + "||:\r\n";
@@ -804,7 +802,7 @@ namespace SA_lab_2
             }
             if (!Vlasn)
             {
-                Result.Text += "\r\nу формі поліному\r\n";
+                Result.Text += "\r\nIn the form of polynomial\r\n";
                 Pfunk Pf = new Pfunk(PolynomChebishev);
                 if (PolinoType.SelectedIndex == 1)
                     Pf = new Pfunk(PolynomChebishev2);
@@ -900,11 +898,11 @@ namespace SA_lab_2
             }
             if (Flag)
             {
-                Result.Text += "\r\n Матриця ||a||:\r\n";
+                Result.Text += "\r\n Matrix ||a||:\r\n";
 
                 for (int m = 0; m < dy; m++)
                 {
-                    Result.Text += "Матриця ||a" + (m + 1) + "||:\r\n";
+                    Result.Text += "Matrix ||a" + (m + 1) + "||:\r\n";
                     for (int i = 0; i < N; i++)
                     {
                         for (int j = 0; j < d[i]; j++)
@@ -921,7 +919,7 @@ namespace SA_lab_2
         private void ФimShow(double[][][] a)
         {
             Result.Text += "\r\n Ф:\r\n";
-            Result.Text += "у формі ψ \r\n";
+            Result.Text += "In the form ψ \r\n";
             for (int i = 0; i < N; i++)
             {
 
@@ -991,9 +989,9 @@ namespace SA_lab_2
                 textBox1.Text = "";
                 for (int m = 0; m < dy; m++)
                 {
-                    textBox1.Text += "Максимум по Y" + (m + 1) + ": " + (Math.Abs(diff[m]) /** (MaxY[m] - MinY[m])*/).ToString("F4") + "\r\n";
+                    textBox1.Text += "Max in Y" + (m + 1) + ": " + (Math.Abs(diff[m]) /** (MaxY[m] - MinY[m])*/).ToString("F4") + "\r\n";
                 }
-                Result.Text += "\r\n Матриця ||c||:\r\n";
+                Result.Text += "\r\n Matrix ||c||:\r\n";
                 for (int m = 0; m < dy; m++)
                 {
                     for (int i = 0; i < N; i++)
@@ -1007,7 +1005,7 @@ namespace SA_lab_2
         private void ФShow(double[][] c, int[] P)
         {
             Result.Text += "\r\n Ф:\r\n";
-            Result.Text += "у формі Фі: \r\n";
+            Result.Text += "In the form Фі: \r\n";
             for (int m = 0; m < dy; m++)
             {
                 Result.Text += "Ф" + (m + 1) + " =  ";
@@ -1024,7 +1022,7 @@ namespace SA_lab_2
         private void ReNorm(double[][] c, int[] P)
         {
             Result.Text += "\r\n  ";
-            Result.Text += "\r\n Ф без нормалізації для різних Yi:\r\n";
+            Result.Text += "\r\n Ф without normalization for different Yi:\r\n";
             double temp;
             for (int m = 0; m < dy; m++)
             {
@@ -1064,22 +1062,16 @@ namespace SA_lab_2
             for (int i = 0; i < N; i++)
                 Result.Text += "P" + (i + 1) + " = " + P[i] + "  ";
             Result.Text += "\r\n";
-            Result.Text += "Поліном " + PolinoType.Text.ToString() + "\r\n\r\n";
-            progressBar1.Value = 0;
-            progressBar1.Refresh();
+            Result.Text += "Polynomial " + PolinoType.Text.ToString() + "\r\n\r\n";
 
             ReadData();
-            progressBar1.Value = 10;
-            progressBar1.Refresh();
+
 
             StreamWriter Out = new StreamWriter(OStream);
             MinMaxFound();
-            progressBar1.Value = 15;
-            progressBar1.Refresh();
+
 
             Normalizing();
-            progressBar1.Value = 20;
-            progressBar1.Refresh();
 
             double[][][,] lamb = new double[dy][][,];
             for (int m = 0; m < dy; m++)
@@ -1104,16 +1096,12 @@ namespace SA_lab_2
                         B[m] = Bq();
                 }
             }
-            progressBar1.Value = 30;
-            progressBar1.Refresh();
 
             for (int m = 0; m < dy; m++)
             {
                 Result.Text += (m + 1) + ":\r\n\r\n";
                 lamb[m] = LambdaSearch(B[m], P, lamb[m]);
             }
-            progressBar1.Value = 40;
-            progressBar1.Refresh();
 
             double[][][][][] coef = new double[dy][][][][];
             for (int m = 0; m < dy; m++)
@@ -1133,8 +1121,6 @@ namespace SA_lab_2
                 }
             }
             coef = PsiShow(lamb, P, coef);
-            progressBar1.Value = 50;
-            progressBar1.Refresh();
 
             double[][][] a = new double[dy][][];
             for (int i = 0; i < dy; i++) a[i] = new double[N][];
@@ -1142,12 +1128,9 @@ namespace SA_lab_2
                 for (int j = 0; j < N; j++)
                     a[i][j] = new double[d[j]];
             a = ASearch(a);
-            progressBar1.Value = 60;
-            progressBar1.Refresh();
+
 
             ФimShow(a);
-            progressBar1.Value = 70;
-            progressBar1.Refresh();
 
             double[][] c = new double[dy][];
             for (int m = 0; m < dy; m++)
@@ -1155,12 +1138,8 @@ namespace SA_lab_2
                 c[m] = new double[N];
             }
             c = CSearch(a, c);
-            progressBar1.Value = 80;
-            progressBar1.Refresh();
 
             ФShow(c, P);
-            progressBar1.Value = 90;
-            progressBar1.Refresh();
 
             ReNorm(c, P);
 
@@ -1176,8 +1155,6 @@ namespace SA_lab_2
             Out.Write(Result.Text);
             Out.Close();
             OStream.Close();
-            progressBar1.Value = 100;
-            progressBar1.Refresh();
         }
         void Draw(int m)
         {
@@ -1190,7 +1167,7 @@ namespace SA_lab_2
             gPanel.DrawLine(p, new Point(3, panel1.Height - 3), new Point(panel1.Width - 3, panel1.Height - 3));
 
             p = new Pen(Color.Red, 1);
-            gPanel.DrawString("Апроксимація", segoeUI, new SolidBrush(Color.Red), new PointF(panel1.Width - 100 + 33, 20), new StringFormat());
+            gPanel.DrawString("Approximation", segoeUI, new SolidBrush(Color.Red), new PointF(panel1.Width - 100 + 33, 20), new StringFormat());
             gPanel.DrawLine(p, new Point(panel1.Width - 100, 30),
             new Point(panel1.Width - 100 + 30, 30));
 
@@ -1201,7 +1178,7 @@ namespace SA_lab_2
             }
 
             p = new Pen(Color.Blue, 1);
-            gPanel.DrawString("Функція", segoeUI, new SolidBrush(Color.Blue), new PointF(panel1.Width - 100 + 33, 30), new StringFormat());
+            gPanel.DrawString("Function", segoeUI, new SolidBrush(Color.Blue), new PointF(panel1.Width - 100 + 33, 30), new StringFormat());
             gPanel.DrawLine(p, new Point(panel1.Width - 100, 40),
             new Point(panel1.Width - 100 + 30, 40));
 
@@ -1299,10 +1276,8 @@ namespace SA_lab_2
                             }
                     }
                 }
-                progressBar1.Value = (int)((p1 + 1) / amount * 100);
-                progressBar1.Refresh();
             }
-            Result.Text = "Найкраща степінь: \r\n";
+            Result.Text = "The best power: \r\n";
             for (int m = 0; m < dy; m++)
             {
                 for (int i = 0; i < N; i++)

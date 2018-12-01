@@ -129,7 +129,7 @@
             this.groupBoxInput.TabIndex = 0;
             this.groupBoxInput.TabStop = false;
             this.groupBoxInput.Text = "Input Data about our System";
-            this.groupBoxInput.Enter += new System.EventHandler(this.groupBoxInput_Enter);
+           // this.groupBoxInput.Enter += new System.EventHandler(this.groupBoxInput_Enter);
             // 
             // VlasniiMethod
             // 
@@ -238,7 +238,7 @@
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Dimension";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+           // this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dimy
             // 
@@ -458,7 +458,7 @@
             this.label8.Size = new System.Drawing.Size(131, 13);
             this.label8.TabIndex = 17;
             this.label8.Text = "Download Data Vector Y";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+           // this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // outfilebutton
             // 

@@ -184,7 +184,7 @@ namespace SA_lab_2
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Немжливо прочитати файл. " + ex.Message);
+                    MessageBox.Show("Unable to read a file. " + ex.Message);
                 }
             }
         }
@@ -279,7 +279,7 @@ namespace SA_lab_2
         }
         private void outfilebutton_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "Текстові файли (*.txt)|*.txt";
+            saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if ((OStream = saveFileDialog1.OpenFile()) != null)
@@ -303,7 +303,7 @@ namespace SA_lab_2
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Немжливо прочитати файл. " + ex.Message);
+                    MessageBox.Show("Unable to read a file. " + ex.Message);
                 }
             }
         }
@@ -316,7 +316,7 @@ namespace SA_lab_2
             // Error Checking
             if (Xinput.Text == null || outfile.Text == null || Yinput.Text == null)
             {
-                MessageBox.Show("Введіть вхідні файли");
+                MessageBox.Show("Enter input files");
                 return;
             }
             OStream = saveFileDialog1.OpenFile();
@@ -340,43 +340,54 @@ namespace SA_lab_2
             Y = new double[dy][];
             for (int i = 0; i < dy; i++)
                 Y[i] = new double[n];
-            progressBar1.Value = 5;
-            progressBar1.Refresh();
             PolyCoef = new double[dy][][][];
             for (int m = 0; m < dy; m++)
                 PolyCoef[m] = new double[N][][];
 
             // Reading
-            using (StreamReader sr = new StreamReader(XStream))
+            StreamReader Xr = new StreamReader(XStream);
+            StreamReader Yr = new StreamReader(YStream);
+            String t;
+            double[] arr;
+            try
             {
-                for (int l = 0; l < N; l++)
-                {
-                    for (int j = 0; j < d[l]; j++)
-                    {
-                        for (int i = 0; i < n; i++)
-                        {
-                            string line = sr.ReadLine();
-                            X[l][i, j] = Convert.ToDouble(line);
-                        }
-                    }
-                }
+                t = Xr.ReadToEnd();
+                arr = t.Split(' ', '\t', '\r', '\n', '	').Where(l => !string.IsNullOrEmpty(l)).Select(q => double.Parse(q)).ToArray();
             }
-
-            using (StreamReader sr = new StreamReader(YStream))
+            catch
             {
-                for (int i = 0; i < dy; i++) //, p++)
+                MessageBox.Show("Incorrect format of input files");
+                return;
+            }
+            for (int i = 0, k = 0; i < n; i++)
+            {
+                k++;
+                for (int l = 0; l < N; l++)
+                    for (int j = 0; j < d[l]; j++, k++)
+                        X[l][i, j] = arr[k];
+            }
+            try
+            {
+                t = Yr.ReadToEnd();
+                arr = t.Split(' ', '\t', '\r', '\n', ' ').Where(l => !string.IsNullOrEmpty(l)).Select(q => double.Parse(q)).ToArray();
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect format of files Y ");
+                return;
+            }
+            int p = 0;
+            for (int j = 0; j < n; j++)
+            {
+                for (int i = 0; i < dy; i++, p++)
                 {
-                    for (int j = 0; j < n; j++)
-                    {
-                        string line = sr.ReadLine();
-                        Y[i][j] = Convert.ToDouble(line);
-                    }
+                    Y[i][j] = arr[p];
                 }
             }
         }
         private void MinMaxFound()
         {
-            Result.Text += "Мінімальні та максимальні значення векторів:\r\n";
+            Result.Text += "Max and min values of vectors:\r\n";
             Result.Refresh();
             MinX = new double[N][];
             for (int i = 0; i < N; i++)
@@ -410,7 +421,7 @@ namespace SA_lab_2
                 foreach (double x in Y[i]) if (MaxY[i] < x) MaxY[i] = x;
             }
             for (int i = 0; i < dy; i++)
-                Result.Text += "мінімум Y" + (i + 1) + " = " + MinY[i] + "\tмаксимум Y" + (i + 1) + " = " + MaxY[i] + "\r\n";
+                Result.Text += "min Y" + (i + 1) + " = " + MinY[i] + "\tmax Y" + (i + 1) + " = " + MaxY[i] + "\r\n";
         }
         private void Normalizing()
         {
@@ -511,7 +522,7 @@ namespace SA_lab_2
                                 for (int p = 0; p < P[i]; p++)
                                 {
                                     if (Vlasn)
-                                        T[q0][k] = 1.2 + Math.Sinh(f(p + 1, (2 + Z[i][q0, j]) / 4));
+                                        T[q0][k] = Math.Cosh(f(p + 1, (2 + Z[i][q0, j]) / 4));
                                     else
                                         T[q0][k] = 1 + f(p + 1, (2 + Z[i][q0, j]) / 4);
                                     if (T[q0][k] <= 0)
@@ -568,7 +579,7 @@ namespace SA_lab_2
                                 for (int p = 0; p < P[i]; p++)
                                 {
                                     if (Vlasn)
-                                        T[q0][k] = 1.2 + Math.Sinh(f(p + 1, (2 + Z[i][q0, j]) / 4));
+                                        T[q0][k] = Math.Cosh(f(p + 1, (2 + Z[i][q0, j]) / 4));
                                     else
                                         T[q0][k] = 1 + f(p + 1, (2 + Z[i][q0, j]) / 4);
                                     if (T[q0][k] <= 0)
@@ -628,13 +639,13 @@ namespace SA_lab_2
                                 {
                                     if (p == 0)
                                         if (Vlasn)
-                                            T[q0][k] = Math.Log(1.2 + Math.Sinh(1));
+                                            T[q0][k] = Math.Log(Math.Cosh(1));
                                         else
                                             T[q0][k] = Math.Log(1.5);
                                     else
                                     {
                                         if (Vlasn)
-                                            T[q0][k] = 1.2 + Math.Sinh(f(p, Z[i][q0, j]));
+                                            T[q0][k] = Math.Cosh(f(p, Z[i][q0, j]));
                                         else
                                             T[q0][k] = 1 + f(p, Z[i][q0, j]);
                                         if (T[q0][k] <= 0)
@@ -695,13 +706,13 @@ namespace SA_lab_2
                                 {
                                     if (p == 0)
                                         if (Vlasn)
-                                            T[q0][k] = Math.Log(1.2 + Math.Sinh(1));
+                                            T[q0][k] = Math.Log(Math.Cosh(1));
                                         else
                                             T[q0][k] = Math.Log(1.5);
                                     else
                                     {
                                         if (Vlasn)
-                                            T[q0][k] = 1.2 + Math.Sinh(f(p, Z[i][q0, j]));
+                                            T[q0][k] = Math.Cosh(f(p, Z[i][q0, j]));
                                         else
                                             T[q0][k] = 1 + f(p, Z[i][q0, j]);
                                         if (T[q0][k] <= 0)
@@ -742,7 +753,7 @@ namespace SA_lab_2
             }
             if (Flag)
             {
-                Result.Text += "\r\n Матриця λ:\r\n";
+                Result.Text += "\r\n Matrix λ:\r\n";
                 for (int i = 0; i < N; i++)
                 {
                     Result.Text += "\t ||λ" + (i + 1) + "||:\r\n";
@@ -780,7 +791,7 @@ namespace SA_lab_2
                                     }
                                 }
                                 if (Vlasn)
-                                    Result.Text += lamb[m][i][j, p].ToString("F4") + " *ln(1.2 + Sh (C" + p + "(x" + (i + 1) + "," + (j + 1) + ") ) ) ";
+                                    Result.Text += lamb[m][i][j, p].ToString("F4") + " *ln(1 + Sin (C" + p + "(x" + (i + 1) + "," + (j + 1) + ") ) ) ";
                                 else
                                     Result.Text += lamb[m][i][j, p].ToString("F4") + " *ln(1 + C" + p + "(x" + (i + 1) + "," + (j + 1) + ") ) ";
                             }
@@ -791,7 +802,7 @@ namespace SA_lab_2
             }
             if (!Vlasn)
             {
-                Result.Text += "\r\nу формі поліному\r\n";
+                Result.Text += "\r\nIn the form of polynomial\r\n";
                 Pfunk Pf = new Pfunk(PolynomChebishev);
                 if (PolinoType.SelectedIndex == 1)
                     Pf = new Pfunk(PolynomChebishev2);
@@ -869,7 +880,7 @@ namespace SA_lab_2
                         for (int j = 0; j < d[i]; j++)
                         {
                             if (Vlasn)
-                                T[q0][k] = Math.Sinh(ksi[i][j][q0]) + 1.2;
+                                T[q0][k] = Math.Cosh(ksi[i][j][q0]);
                             else
                                 T[q0][k] = ksi[i][j][q0] + 1;
                             if (T[q0][k] <= 0)
@@ -887,11 +898,11 @@ namespace SA_lab_2
             }
             if (Flag)
             {
-                Result.Text += "\r\n Матриця ||a||:\r\n";
+                Result.Text += "\r\n Matrix ||a||:\r\n";
 
                 for (int m = 0; m < dy; m++)
                 {
-                    Result.Text += "Матриця ||a" + (m + 1) + "||:\r\n";
+                    Result.Text += "Matrix ||a" + (m + 1) + "||:\r\n";
                     for (int i = 0; i < N; i++)
                     {
                         for (int j = 0; j < d[i]; j++)
@@ -908,7 +919,7 @@ namespace SA_lab_2
         private void ФimShow(double[][][] a)
         {
             Result.Text += "\r\n Ф:\r\n";
-            Result.Text += "у формі ψ \r\n";
+            Result.Text += "In the form ψ \r\n";
             for (int i = 0; i < N; i++)
             {
 
@@ -918,7 +929,7 @@ namespace SA_lab_2
                     for (int j = 0; j < d[i]; j++)
                     {
                         if (Vlasn)
-                            Result.Text += "(Sh (ψ" + (i + 1) + "," + (j + 1) + ") + 1.2) ^" + a[m][i][j].ToString("F4") + "  ";
+                            Result.Text += "(Sin (ψ" + (i + 1) + "," + (j + 1) + ") + 1) ^" + a[m][i][j].ToString("F4") + "  ";
                         else
                             Result.Text += "(ψ" + (i + 1) + "," + (j + 1) + " + 1) ^" + a[m][i][j].ToString("F4") + "  ";
                     }
@@ -944,11 +955,11 @@ namespace SA_lab_2
                         double tmp = 1;
                         for (int j = 0; j < d[i]; j++)
                             if (Vlasn)
-                                tmp *= Math.Pow(1.2 + Math.Sinh(ksi[i][j][q0]), a[m][i][j]);
+                                tmp *= Math.Pow(Math.Cosh(ksi[i][j][q0]), a[m][i][j]);
                             else
                                 tmp *= Math.Pow(1 + ksi[i][j][q0], a[m][i][j]);
                         if (Vlasn)
-                            tmp = Math.Sinh(tmp - 1) + 1.2;
+                            tmp = Math.Cosh(tmp - 1);
                         if (tmp <= 0)
                         {
                             tmp = e;
@@ -978,9 +989,9 @@ namespace SA_lab_2
                 textBox1.Text = "";
                 for (int m = 0; m < dy; m++)
                 {
-                    textBox1.Text += "Максимум по Y" + (m + 1) + ": " + (Math.Abs(diff[m]) /** (MaxY[m] - MinY[m])*/).ToString("F4") + "\r\n";
+                    textBox1.Text += "Max in Y" + (m + 1) + ": " + (Math.Abs(diff[m]) /** (MaxY[m] - MinY[m])*/).ToString("F4") + "\r\n";
                 }
-                Result.Text += "\r\n Матриця ||c||:\r\n";
+                Result.Text += "\r\n Matrix ||c||:\r\n";
                 for (int m = 0; m < dy; m++)
                 {
                     for (int i = 0; i < N; i++)
@@ -991,23 +1002,17 @@ namespace SA_lab_2
             }
             return c;
         }
-
-        private void groupBoxInput_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void ФShow(double[][] c, int[] P)
         {
             Result.Text += "\r\n Ф:\r\n";
-            Result.Text += "у формі Фі: \r\n";
+            Result.Text += "In the form Фі: \r\n";
             for (int m = 0; m < dy; m++)
             {
                 Result.Text += "Ф" + (m + 1) + " =  ";
                 for (int i = 0; i < N; i++)
                 {
                     if (Vlasn)
-                        Result.Text += "(1.2 + Sh (Ф" + (i + 1) + "," + (m + 1) + ") ) ^" + c[m][i].ToString("F4") + "  ";
+                        Result.Text += "(1 + Sin (Ф" + (i + 1) + "," + (m + 1) + ") ) ^" + c[m][i].ToString("F4") + "  ";
                     else
                         Result.Text += "(1 + Ф" + (i + 1) + "," + (m + 1) + " ) ^" + c[m][i].ToString("F4") + "  ";
                 }
@@ -1017,17 +1022,14 @@ namespace SA_lab_2
         private void ReNorm(double[][] c, int[] P)
         {
             Result.Text += "\r\n  ";
-            Result.Text += "\r\n Ф без нормалізації для різних Yi:\r\n";
+            Result.Text += "\r\n Ф without normalization for different Yi:\r\n";
             double temp;
             for (int m = 0; m < dy; m++)
             {
                 Result.Text += "Ф" + (m + 1) + " =  " + (MaxY[m] - MinY[m]).ToString("F4");
                 for (int i = 0; i < N; i++)
                 {
-                    if (Vlasn)
-                        Result.Text += "(1.2 + Sh (Ф" + (i + 1) + "," + (m + 1) + ") ) ^" + c[m][i].ToString("F4") + "  ";
-                    else
-                        Result.Text += "(1 + Ф" + (i + 1) + "," + (m + 1) + " ) ^" + c[m][i].ToString("F4") + "  ";
+                    Result.Text += "(1 + Ф" + (i + 1) + "," + (m + 1) + " ) ^" + c[m][i].ToString("F4") + "  ";
                 }
                 temp = -MaxY[m] + 2 * MinY[m];
                 if (temp > 0)
@@ -1060,22 +1062,16 @@ namespace SA_lab_2
             for (int i = 0; i < N; i++)
                 Result.Text += "P" + (i + 1) + " = " + P[i] + "  ";
             Result.Text += "\r\n";
-            Result.Text += "Поліном " + PolinoType.Text.ToString() + "\r\n\r\n";
-            progressBar1.Value = 0;
-            progressBar1.Refresh();
+            Result.Text += "Polynomial " + PolinoType.Text.ToString() + "\r\n\r\n";
 
             ReadData();
-            progressBar1.Value = 10;
-            progressBar1.Refresh();
+
 
             StreamWriter Out = new StreamWriter(OStream);
             MinMaxFound();
-            progressBar1.Value = 15;
-            progressBar1.Refresh();
+
 
             Normalizing();
-            progressBar1.Value = 20;
-            progressBar1.Refresh();
 
             double[][][,] lamb = new double[dy][][,];
             for (int m = 0; m < dy; m++)
@@ -1100,31 +1096,12 @@ namespace SA_lab_2
                         B[m] = Bq();
                 }
             }
-            progressBar1.Value = 30;
-            progressBar1.Refresh();
 
-            if (!radioButton_normy.Checked)
-                lamb[0] = LambdaSearch(B[0], P, lamb[0]);
             for (int m = 0; m < dy; m++)
             {
-                if (radioButton_normy.Checked)
-                {
-                    Result.Text += (m + 1) + ":\r\n\r\n";
-                    lamb[m] = LambdaSearch(B[m], P, lamb[m]);
-                }
-                else
-                    if (m != dy - 1)
-                    {
-                        for (int i = 0; i < N; i++)
-                        {
-                            for (int j = 0; j < d[i]; j++)
-                                for (int p = 0; p < P[i] + 1; p++)
-                                    lamb[m + 1][i][j, p] = lamb[m][i][j, p];
-                        }
-                    }
+                Result.Text += (m + 1) + ":\r\n\r\n";
+                lamb[m] = LambdaSearch(B[m], P, lamb[m]);
             }
-            progressBar1.Value = 40;
-            progressBar1.Refresh();
 
             double[][][][][] coef = new double[dy][][][][];
             for (int m = 0; m < dy; m++)
@@ -1144,8 +1121,6 @@ namespace SA_lab_2
                 }
             }
             coef = PsiShow(lamb, P, coef);
-            progressBar1.Value = 50;
-            progressBar1.Refresh();
 
             double[][][] a = new double[dy][][];
             for (int i = 0; i < dy; i++) a[i] = new double[N][];
@@ -1153,12 +1128,9 @@ namespace SA_lab_2
                 for (int j = 0; j < N; j++)
                     a[i][j] = new double[d[j]];
             a = ASearch(a);
-            progressBar1.Value = 60;
-            progressBar1.Refresh();
+
 
             ФimShow(a);
-            progressBar1.Value = 70;
-            progressBar1.Refresh();
 
             double[][] c = new double[dy][];
             for (int m = 0; m < dy; m++)
@@ -1166,20 +1138,13 @@ namespace SA_lab_2
                 c[m] = new double[N];
             }
             c = CSearch(a, c);
-            progressBar1.Value = 80;
-            progressBar1.Refresh();
 
             ФShow(c, P);
-            progressBar1.Value = 90;
-            progressBar1.Refresh();
 
             ReNorm(c, P);
 
             Approximate = true;
             Draw(Convert.ToInt32(numericUpDown1.Value - 1));
-
-            if (Forcast.Checked)
-                Forecast(lamb, a, c, P);
 
             XStream.Close();
             XStream = openFileDialog1.OpenFile();
@@ -1190,8 +1155,6 @@ namespace SA_lab_2
             Out.Write(Result.Text);
             Out.Close();
             OStream.Close();
-            progressBar1.Value = 100;
-            progressBar1.Refresh();
         }
         void Draw(int m)
         {
@@ -1204,7 +1167,7 @@ namespace SA_lab_2
             gPanel.DrawLine(p, new Point(3, panel1.Height - 3), new Point(panel1.Width - 3, panel1.Height - 3));
 
             p = new Pen(Color.Red, 1);
-            gPanel.DrawString("Апроксимація", segoeUI, new SolidBrush(Color.Red), new PointF(panel1.Width - 100 + 33, 20), new StringFormat());
+            gPanel.DrawString("Approximation", segoeUI, new SolidBrush(Color.Red), new PointF(panel1.Width - 100 + 33, 20), new StringFormat());
             gPanel.DrawLine(p, new Point(panel1.Width - 100, 30),
             new Point(panel1.Width - 100 + 30, 30));
 
@@ -1215,7 +1178,7 @@ namespace SA_lab_2
             }
 
             p = new Pen(Color.Blue, 1);
-            gPanel.DrawString("Функція", segoeUI, new SolidBrush(Color.Blue), new PointF(panel1.Width - 100 + 33, 30), new StringFormat());
+            gPanel.DrawString("Function", segoeUI, new SolidBrush(Color.Blue), new PointF(panel1.Width - 100 + 33, 30), new StringFormat());
             gPanel.DrawLine(p, new Point(panel1.Width - 100, 40),
             new Point(panel1.Width - 100 + 30, 40));
 
@@ -1313,10 +1276,8 @@ namespace SA_lab_2
                             }
                     }
                 }
-                progressBar1.Value = (int)((p1 + 1) / amount * 100);
-                progressBar1.Refresh();
             }
-            Result.Text = "Найкраща степінь: \r\n";
+            Result.Text = "The best power: \r\n";
             for (int m = 0; m < dy; m++)
             {
                 for (int i = 0; i < N; i++)
@@ -1333,93 +1294,8 @@ namespace SA_lab_2
             }
         }
 
-        void Forecast(double[][][,] lamb, double[][][] a, double[][] c, int[] P)
+        private void button1_Click(object sender, EventArgs e)
         {
-            int n = Convert.ToInt32(rangeForcast.Value);
-            double[][,] Xf = new double[N][,];
-            for (int l = 0; l < N; l++)
-            {
-                Xf[l] = new double[n, d[l]];
-            }
-            using (StreamReader sr = new StreamReader(XForecast))
-            {
-                for (int l = 0; l < N; l++)
-                {
-                    for (int j = 0; j < d[l]; j++)
-                    {
-                        for (int i = 0; i < n; i++)
-                        {
-                            string line = sr.ReadLine();
-                            Xf[l][i, j] = Convert.ToDouble(line);
-                        }
-                    }
-                }
-            }
-            double[][] MinX = new double[N][];
-            for (int i = 0; i < N; i++)
-                MinX[i] = new double[d[i]];
-            double[][] MaxX = new double[N][];
-            for (int i = 0; i < N; i++)
-                MaxX[i] = new double[d[i]];
-            for (int i = 0; i < N; i++)
-                for (int j = 0; j < d[i]; j++)
-                    MinX[i][j] = MaxX[i][j] = Xf[i][0, j];
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = 0; j < d[i]; j++)
-                {
-                    for (int q0 = 0; q0 < n; q0++)
-                    {
-                        if (MinX[i][j] > Xf[i][q0, j])
-                            MinX[i][j] = Xf[i][q0, j];
-                        if (MaxX[i][j] < Xf[i][q0, j])
-                            MaxX[i][j] = Xf[i][q0, j];
-                    }
-                }
-            }
-            for (int i = 0; i < N; i++)
-            {
-                for (int k = 0; k < n; k++)
-                    for (int w = 0; w < d[i]; w++)
-                        Xf[i][k, w] = (Xf[i][k, w] - MinX[i][w]) / (MaxX[i][w] - MinX[i][w]);
-
-            }
-            funk f = new funk(SChebishev2);
-            if (PolinoType.SelectedIndex == 2)
-                f = new funk(SChebishev3);
-            if (PolinoType.SelectedIndex == 0)
-                f = new funk(SChebishev);
-            for (int m = 0; m < dy; m++)
-            {
-                for (int q = 0; q < n; q++)
-                {
-                    for (int i = 0; i < N; i++)
-                    {
-                        double temp = 0;
-                        for (int j = 0; j < d[i]; j++)
-                        {
-                            double temp2 = 0;
-                            for (int p = 0; p <= P[i]; p++)
-                            {
-                                if (Vlasn)
-                                    temp2 += lamb[m][i][j, p] * Math.Log(1.2 + Math.Sinh(f(p, Xf[i][q, j])));
-                                else
-                                    temp2 += lamb[m][i][j, p] * Math.Log(1 + f(p, Xf[i][q, j]));
-                            }
-                            if (Vlasn)
-                                temp += a[m][i][j] * Math.Log(1.2 + Math.Sinh(ksi[i][j][q]));
-                            else
-                                temp += a[m][i][j] * Math.Log(1 + ksi[i][j][q]);
-                        }
-                        temp = Math.Exp(temp) - 1;
-                        if (Vlasn)
-                            vlnovFunc[m, q] += c[m][i] * Math.Log(1.2 + Math.Sinh(temp));
-                        else
-                            vlnovFunc[m, q] += c[m][i] * Math.Log(1 + temp);
-                    }
-                    vlnovFunc[m, q] = (Math.Exp(vlnovFunc[m, q]) - 1);
-                }
-            }
 
         }
 
@@ -1429,14 +1305,14 @@ namespace SA_lab_2
             {
                 try
                 {
-                    if ((XForecast = openFileDialog1.OpenFile()) != null)
+                    if ((XStream = openFileDialog1.OpenFile()) != null)
                     {
-                        Box_fileForcast.Text = FileForecast.SafeFileName;
+                        Box_fileForcast.Text = openFileDialog1.SafeFileName;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Немжливо прочитати файл. " + ex.Message);
+                    MessageBox.Show("Unable to read a file. " + ex.Message);
                 }
             }
         }

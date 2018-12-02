@@ -28,26 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBoxInput = new System.Windows.Forms.GroupBox();
             this.VlasniiMethod = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.PolinoType = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dimy = new System.Windows.Forms.NumericUpDown();
-            this.Rankx3 = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
-            this.Rankx2 = new System.Windows.Forms.NumericUpDown();
             this.dim2 = new System.Windows.Forms.NumericUpDown();
             this.Range = new System.Windows.Forms.NumericUpDown();
-            this.Rankx1 = new System.Windows.Forms.NumericUpDown();
             this.addbutton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -61,6 +51,15 @@
             this.Yinput = new System.Windows.Forms.TextBox();
             this.dim1 = new System.Windows.Forms.NumericUpDown();
             this.dim3 = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.PolinoType = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.Rankx3 = new System.Windows.Forms.NumericUpDown();
+            this.Rankx2 = new System.Windows.Forms.NumericUpDown();
+            this.Rankx1 = new System.Windows.Forms.NumericUpDown();
             this.Result = new System.Windows.Forms.TextBox();
             this.Start = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -85,13 +84,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBoxInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dimy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Rankx3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Rankx2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dim2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Range)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Rankx1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dim1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dim3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rankx3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rankx2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rankx1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox_Bq.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rangeForcast)).BeginInit();
@@ -129,7 +128,6 @@
             this.groupBoxInput.TabIndex = 0;
             this.groupBoxInput.TabStop = false;
             this.groupBoxInput.Text = "Input Data about our System";
-           // this.groupBoxInput.Enter += new System.EventHandler(this.groupBoxInput_Enter);
             // 
             // VlasniiMethod
             // 
@@ -153,47 +151,6 @@
             this.checkBox1.Text = "Separate computing system";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 244);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(101, 13);
-            this.label17.TabIndex = 22;
-            this.label17.Text = "Power of polynom";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 204);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 13);
-            this.label15.TabIndex = 21;
-            this.label15.Text = "Polynom";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 340);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(19, 13);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Р3";
-            // 
-            // PolinoType
-            // 
-            this.PolinoType.DisplayMember = "Чебишева";
-            this.PolinoType.FormattingEnabled = true;
-            this.PolinoType.Items.AddRange(new object[] {
-            "T*n ( (x+4)/2)",
-            "Un (x)",
-            "Sn (x)"});
-            this.PolinoType.Location = new System.Drawing.Point(6, 220);
-            this.PolinoType.Name = "PolinoType";
-            this.PolinoType.Size = new System.Drawing.Size(119, 21);
-            this.PolinoType.TabIndex = 4;
-            this.PolinoType.Text = "T*n ( (x+4)/2)";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -202,15 +159,6 @@
             this.label12.Size = new System.Drawing.Size(115, 13);
             this.label12.TabIndex = 20;
             this.label12.Text = "Dimension of vectors";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 301);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(19, 13);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Р2";
             // 
             // label5
             // 
@@ -221,15 +169,6 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "y";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 262);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(19, 13);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Р1";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -238,7 +177,6 @@
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Dimension";
-           // this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dimy
             // 
@@ -263,28 +201,6 @@
             0});
             this.dimy.ValueChanged += new System.EventHandler(this.dimy_ValueChanged);
             // 
-            // Rankx3
-            // 
-            this.Rankx3.Location = new System.Drawing.Point(31, 338);
-            this.Rankx3.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.Rankx3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.Rankx3.Name = "Rankx3";
-            this.Rankx3.Size = new System.Drawing.Size(59, 22);
-            this.Rankx3.TabIndex = 9;
-            this.Rankx3.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -293,28 +209,6 @@
             this.label6.Size = new System.Drawing.Size(132, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "Download Data Vector X";
-            // 
-            // Rankx2
-            // 
-            this.Rankx2.Location = new System.Drawing.Point(31, 299);
-            this.Rankx2.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.Rankx2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.Rankx2.Name = "Rankx2";
-            this.Rankx2.Size = new System.Drawing.Size(59, 22);
-            this.Rankx2.TabIndex = 8;
-            this.Rankx2.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
             // 
             // dim2
             // 
@@ -356,28 +250,6 @@
             this.Range.TabIndex = 0;
             this.Range.Value = new decimal(new int[] {
             45,
-            0,
-            0,
-            0});
-            // 
-            // Rankx1
-            // 
-            this.Rankx1.Location = new System.Drawing.Point(31, 260);
-            this.Rankx1.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.Rankx1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.Rankx1.Name = "Rankx1";
-            this.Rankx1.Size = new System.Drawing.Size(59, 22);
-            this.Rankx1.TabIndex = 7;
-            this.Rankx1.Value = new decimal(new int[] {
-            3,
             0,
             0,
             0});
@@ -458,7 +330,6 @@
             this.label8.Size = new System.Drawing.Size(131, 13);
             this.label8.TabIndex = 17;
             this.label8.Text = "Download Data Vector Y";
-           // this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // outfilebutton
             // 
@@ -528,6 +399,130 @@
             this.dim3.Size = new System.Drawing.Size(59, 22);
             this.dim3.TabIndex = 6;
             this.dim3.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 244);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(101, 13);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "Power of polynom";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 204);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(51, 13);
+            this.label15.TabIndex = 21;
+            this.label15.Text = "Polynom";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 340);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(19, 13);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Р3";
+            // 
+            // PolinoType
+            // 
+            this.PolinoType.DisplayMember = "Чебишева";
+            this.PolinoType.FormattingEnabled = true;
+            this.PolinoType.Items.AddRange(new object[] {
+            "T*n",
+            "1+Tn"});
+            this.PolinoType.Location = new System.Drawing.Point(6, 220);
+            this.PolinoType.Name = "PolinoType";
+            this.PolinoType.Size = new System.Drawing.Size(119, 21);
+            this.PolinoType.TabIndex = 4;
+            this.PolinoType.Text = "T*n";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 301);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(19, 13);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Р2";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 262);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(19, 13);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Р1";
+            // 
+            // Rankx3
+            // 
+            this.Rankx3.Location = new System.Drawing.Point(31, 338);
+            this.Rankx3.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.Rankx3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Rankx3.Name = "Rankx3";
+            this.Rankx3.Size = new System.Drawing.Size(59, 22);
+            this.Rankx3.TabIndex = 9;
+            this.Rankx3.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // Rankx2
+            // 
+            this.Rankx2.Location = new System.Drawing.Point(31, 299);
+            this.Rankx2.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.Rankx2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Rankx2.Name = "Rankx2";
+            this.Rankx2.Size = new System.Drawing.Size(59, 22);
+            this.Rankx2.TabIndex = 8;
+            this.Rankx2.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // Rankx1
+            // 
+            this.Rankx1.Location = new System.Drawing.Point(31, 260);
+            this.Rankx1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.Rankx1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.Rankx1.Name = "Rankx1";
+            this.Rankx1.Size = new System.Drawing.Size(59, 22);
+            this.Rankx1.TabIndex = 7;
+            this.Rankx1.Value = new decimal(new int[] {
             3,
             0,
             0,
@@ -793,13 +788,13 @@
             this.groupBoxInput.ResumeLayout(false);
             this.groupBoxInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dimy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Rankx3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Rankx2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dim2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Range)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Rankx1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dim1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dim3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rankx3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rankx2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Rankx1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox_Bq.ResumeLayout(false);
             this.groupBox_Bq.PerformLayout();

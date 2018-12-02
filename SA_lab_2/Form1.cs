@@ -1307,7 +1307,7 @@ namespace SA_lab_2
                 {
                     if ((XStream = openFileDialog1.OpenFile()) != null)
                     {
-                        Box_fileForcast.Text = openFileDialog1.SafeFileName;
+                        //Box_fileForcast.Text = openFileDialog1.SafeFileName;
                     }
                 }
                 catch (Exception ex)

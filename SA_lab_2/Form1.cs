@@ -791,9 +791,9 @@ namespace SA_lab_2
                                     }
                                 }
                                 if (Vlasn)
-                                    Result.Text += lamb[m][i][j, p].ToString("F4") + " *ln(1 + Csh (T" + p + "(x" + (i + 1) + "," + (j + 1) + ") ) ) ";
+                                    Result.Text += lamb[m][i][j, p].ToString("F4") + " *ln(1 + Sin (C" + p + "(x" + (i + 1) + "," + (j + 1) + ") ) ) ";
                                 else
-                                    Result.Text += lamb[m][i][j, p].ToString("F4") + " *ln(1 + T" + p + "(x" + (i + 1) + "," + (j + 1) + ") ) ";
+                                    Result.Text += lamb[m][i][j, p].ToString("F4") + " *ln(1 + C" + p + "(x" + (i + 1) + "," + (j + 1) + ") ) ";
                             }
                             Result.Text += " - 1 ) \r\n";
                         }
@@ -929,7 +929,7 @@ namespace SA_lab_2
                     for (int j = 0; j < d[i]; j++)
                     {
                         if (Vlasn)
-                            Result.Text += "(Csh (ψ" + (i + 1) + "," + (j + 1) + ") + 1) ^" + a[m][i][j].ToString("F4") + "  ";
+                            Result.Text += "(Sin (ψ" + (i + 1) + "," + (j + 1) + ") + 1) ^" + a[m][i][j].ToString("F4") + "  ";
                         else
                             Result.Text += "(ψ" + (i + 1) + "," + (j + 1) + " + 1) ^" + a[m][i][j].ToString("F4") + "  ";
                     }
@@ -1012,7 +1012,7 @@ namespace SA_lab_2
                 for (int i = 0; i < N; i++)
                 {
                     if (Vlasn)
-                        Result.Text += "(1 + Csh (Ф" + (i + 1) + "," + (m + 1) + ") ) ^" + c[m][i].ToString("F4") + "  ";
+                        Result.Text += "(1 + Sin (Ф" + (i + 1) + "," + (m + 1) + ") ) ^" + c[m][i].ToString("F4") + "  ";
                     else
                         Result.Text += "(1 + Ф" + (i + 1) + "," + (m + 1) + " ) ^" + c[m][i].ToString("F4") + "  ";
                 }
@@ -1166,8 +1166,8 @@ namespace SA_lab_2
             gPanel.DrawLine(p, new Point(3, 3), new Point(3, panel1.Height - 3));
             gPanel.DrawLine(p, new Point(3, panel1.Height - 3), new Point(panel1.Width - 3, panel1.Height - 3));
 
-            p = new Pen(Color.Green, 1);
-            gPanel.DrawString("Approximation", segoeUI, new SolidBrush(Color.Green), new PointF(panel1.Width - 100 + 33, 20), new StringFormat());
+            p = new Pen(Color.Red, 1);
+            gPanel.DrawString("Approximation", segoeUI, new SolidBrush(Color.Red), new PointF(panel1.Width - 100 + 33, 20), new StringFormat());
             gPanel.DrawLine(p, new Point(panel1.Width - 100, 30),
             new Point(panel1.Width - 100 + 30, 30));
 
@@ -1177,8 +1177,8 @@ namespace SA_lab_2
                 new Point((q0 + 1) * (panel1.Width / n) + 3, (int)(panel1.Height * (1 - vlnovFunc[m, q0 + 1])) - 3));
             }
 
-            p = new Pen(Color.Black, 1);
-            gPanel.DrawString("Function", segoeUI, new SolidBrush(Color.Black), new PointF(panel1.Width - 100 + 33, 30), new StringFormat());
+            p = new Pen(Color.Blue, 1);
+            gPanel.DrawString("Function", segoeUI, new SolidBrush(Color.Blue), new PointF(panel1.Width - 100 + 33, 30), new StringFormat());
             gPanel.DrawLine(p, new Point(panel1.Width - 100, 40),
             new Point(panel1.Width - 100 + 30, 40));
 

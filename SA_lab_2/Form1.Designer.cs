@@ -76,7 +76,11 @@
             this.Bq_wide_interval = new System.Windows.Forms.RadioButton();
             this.Bq_arifmet = new System.Windows.Forms.RadioButton();
             this.label_Forecast = new System.Windows.Forms.Label();
+            this.Box_fileForcast = new System.Windows.Forms.TextBox();
+            this.but_downForecast = new System.Windows.Forms.Button();
             this.FileForecast = new System.Windows.Forms.OpenFileDialog();
+            this.Forcast = new System.Windows.Forms.CheckBox();
+            this.rangeForcast = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBoxInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dimy)).BeginInit();
@@ -89,6 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Rankx1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox_Bq.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rangeForcast)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,7 +124,7 @@
             this.groupBoxInput.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxInput.Location = new System.Drawing.Point(12, 425);
             this.groupBoxInput.Name = "groupBoxInput";
-            this.groupBoxInput.Size = new System.Drawing.Size(773, 100);
+            this.groupBoxInput.Size = new System.Drawing.Size(767, 96);
             this.groupBoxInput.TabIndex = 0;
             this.groupBoxInput.TabStop = false;
             this.groupBoxInput.Text = "Input Data about our System";
@@ -675,25 +680,81 @@
             this.label_Forecast.AutoSize = true;
             this.label_Forecast.Location = new System.Drawing.Point(3, 421);
             this.label_Forecast.Name = "label_Forecast";
-            this.label_Forecast.Size = new System.Drawing.Size(0, 13);
+            this.label_Forecast.Size = new System.Drawing.Size(86, 13);
             this.label_Forecast.TabIndex = 27;
+            this.label_Forecast.Text = "Х for forcasting";
+            // 
+            // Box_fileForcast
+            // 
+            this.Box_fileForcast.Location = new System.Drawing.Point(46, 437);
+            this.Box_fileForcast.Name = "Box_fileForcast";
+            this.Box_fileForcast.ReadOnly = true;
+            this.Box_fileForcast.Size = new System.Drawing.Size(91, 22);
+            this.Box_fileForcast.TabIndex = 25;
+            // 
+            // but_downForecast
+            // 
+            this.but_downForecast.Location = new System.Drawing.Point(141, 437);
+            this.but_downForecast.Name = "but_downForecast";
+            this.but_downForecast.Size = new System.Drawing.Size(26, 23);
+            this.but_downForecast.TabIndex = 26;
+            this.but_downForecast.Text = "...";
+            this.but_downForecast.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.but_downForecast.UseVisualStyleBackColor = true;
+            this.but_downForecast.Click += new System.EventHandler(this.but_downForecast_Click);
             // 
             // FileForecast
             // 
             this.FileForecast.FileName = "FileForcast";
             // 
+            // Forcast
+            // 
+            this.Forcast.AutoSize = true;
+            this.Forcast.Location = new System.Drawing.Point(3, 465);
+            this.Forcast.Name = "Forcast";
+            this.Forcast.Size = new System.Drawing.Size(80, 17);
+            this.Forcast.TabIndex = 28;
+            this.Forcast.Text = "Forcasting";
+            this.Forcast.UseVisualStyleBackColor = true;
+            // 
+            // rangeForcast
+            // 
+            this.rangeForcast.Location = new System.Drawing.Point(3, 437);
+            this.rangeForcast.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.rangeForcast.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.rangeForcast.Name = "rangeForcast";
+            this.rangeForcast.Size = new System.Drawing.Size(37, 22);
+            this.rangeForcast.TabIndex = 29;
+            this.rangeForcast.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.Start);
+            this.panel2.Controls.Add(this.Forcast);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label17);
+            this.panel2.Controls.Add(this.rangeForcast);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.Rankx3);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.PolinoType);
             this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.but_downForecast);
             this.panel2.Controls.Add(this.Rankx2);
+            this.panel2.Controls.Add(this.Box_fileForcast);
             this.panel2.Controls.Add(this.groupBox_Bq);
             this.panel2.Controls.Add(this.StPolynom);
             this.panel2.Controls.Add(this.label_Forecast);
@@ -704,7 +765,7 @@
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Location = new System.Drawing.Point(787, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(178, 423);
+            this.panel2.Size = new System.Drawing.Size(186, 509);
             this.panel2.TabIndex = 25;
             // 
             // Form1
@@ -737,6 +798,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox_Bq.ResumeLayout(false);
             this.groupBox_Bq.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rangeForcast)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -794,7 +856,11 @@
         private System.Windows.Forms.RadioButton radioButton_normy;
         private System.Windows.Forms.CheckBox VlasniiMethod;
         private System.Windows.Forms.Label label_Forecast;
+        private System.Windows.Forms.TextBox Box_fileForcast;
+        private System.Windows.Forms.Button but_downForecast;
         private System.Windows.Forms.OpenFileDialog FileForecast;
+        private System.Windows.Forms.CheckBox Forcast;
+        private System.Windows.Forms.NumericUpDown rangeForcast;
         private System.Windows.Forms.Panel panel2;
     }
 }

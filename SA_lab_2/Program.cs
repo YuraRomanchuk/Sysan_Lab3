@@ -17,6 +17,8 @@ namespace SA_lab_2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            // new commit
+            // new commit_2
         }
     }
 }
